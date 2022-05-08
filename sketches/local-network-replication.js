@@ -1,6 +1,6 @@
 import net from 'net'
 import Hypercore from 'hypercore'
-import discovery from 'dns-discovery'
+import { Discovery } from 'mdns-sd-discovery'
 import ram from 'random-access-memory'
 
 /*
@@ -24,11 +24,11 @@ const core = new Hypercore(ram, key)
 // wait for the core to be ready
 await core.ready()
 
-// initialize the dns discovery module to use to find other peers
-const disc = discovery()
+// initialize the mdns-sd-discovery module to use to find other peers
+const discovery = new Discovery()
 
 // listen for new peers
-disc.on('peer', async (name, peer) => {
+discovery.on('peer', async (name, peer) => {
 	console.log('peer', peer)
 
 	// create a tcp socket to connect to the peer
@@ -58,7 +58,7 @@ disc.on('peer', async (name, peer) => {
 
 if (key) {
 	// if we passed a key we'll just look for peers
-	disc.lookup('test')
+	discovery.lookup('test')
 } else {
 	// otherwise this is the writable core, so we'll add data
 	console.log('key:', core.key.toString('hex'))
@@ -95,7 +95,7 @@ if (key) {
 	// start the server
 	server.listen(() => {
 		const address = server.address()
-		// announce this server via dns and mdns
-		disc.announce('test', address.port)
+		// announce this server via mdns
+		discovery.announce('test', address.port)
 	})
 }

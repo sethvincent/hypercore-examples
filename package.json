@@ -14,6 +14,7 @@
     "hyperbee": "^1.8.0",
     "hyperblobs": "^2.0.0-alpha.2",
     "hypercore": "^10.0.0-alpha.38",
+    "mdns-sd-discovery": "^1.0.0",
     "pump": "^3.0.0",
     "random-access-memory": "^4.1.0"
   },
