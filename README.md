@@ -7,3 +7,5 @@
   - [sketch](sketches/json-encoding-replication.js)
 - [x] Sync data over a local network
   - [sketch](sketches/local-network-replication.js) 
+- [x] Create a basic hypercore extension
+  - [sketch](sketches/basic-extension.js)
