@@ -18,7 +18,7 @@ core1.registerExtension('example', {
 })
 
 // register an extension with json encoding
-core1.registerExtension('json-example', {
+const core1JsonExt = core1.registerExtension('json-example', {
 	encoding: 'json',
 	onmessage: (message) => {
 		console.log('json message', message)
@@ -38,7 +38,10 @@ const ext = core2.registerExtension('example', {
 })
 
 const jsonExt = core2.registerExtension('json-example', {
-	encoding: 'json'
+	encoding: 'json',
+	onmessage: (message) => {
+		console.log('message from core1', message)
+	}
 })
 
 // create replication streams for both cores. the first argument indicates whether the core initiated replication
@@ -55,3 +58,6 @@ ext.send('hi', core2.peers[0])
 
 // send a json message
 jsonExt.send({ message: 'hi' }, core2.peers[0])
+
+// send a json message from first core
+core1JsonExt.send({ message: 'hello' }, core1.peers[0])
