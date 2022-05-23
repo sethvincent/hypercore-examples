@@ -1,6 +1,6 @@
 import net from 'net'
 import Hypercore from 'hypercore'
-import { Discovery } from 'mdns-sd-discovery'
+import { MdnsDiscovery } from 'mdns-sd-discovery'
 import ram from 'random-access-memory'
 
 /*
@@ -24,17 +24,17 @@ const core = new Hypercore(ram, key)
 // wait for the core to be ready
 await core.ready()
 
-// initialize the mdns-sd-discovery module to use to find other peers
-const discovery = new Discovery()
+// initialize the mdns-sd-discovery module to use to find other services
+const discovery = new MdnsDiscovery({ host: 'hypercore-experiment' })
 
-// listen for new peers
-discovery.on('peer', async (name, peer) => {
-	console.log('peer', peer)
+// listen for new services
+discovery.on('service', async (name, service) => {
+	console.log('service', name, service)
 
-	// create a tcp socket to connect to the peer
+	// create a tcp socket to connect to the service
 	const socket = net.connect({
-		host: peer.host,
-		port: peer.port,
+		host: service.host,
+		port: service.port,
 		allowHalfOpen: true
 	})
 
@@ -57,12 +57,14 @@ discovery.on('peer', async (name, peer) => {
 })
 
 if (key) {
-	// if we passed a key we'll just look for peers
-	discovery.lookup('test')
+	// if we passed a key we'll just look for services
+	discovery.lookup('hypercore-experiment')
 } else {
 	// otherwise this is the writable core, so we'll add data
 	console.log('key:', core.key.toString('hex'))
-
+	console.log(`run this in a second terminal window passing the key as the first argument:
+		node sketches/local-network-replication.js ${core.key.toString('hex')}
+	`)
 	// appending data
 	core.append([
 		'a',
@@ -81,8 +83,6 @@ if (key) {
 
 	// create a tcp server
 	const server = net.createServer((socket) => {
-		console.log('server core length', core.length)
-
 		// this is the other side of the replication that the tcp client streams to earlier in this file
 		socket.pipe(core.replicate(false)).pipe(socket)
 	})
@@ -96,6 +96,6 @@ if (key) {
 	server.listen(() => {
 		const address = server.address()
 		// announce this server via mdns
-		discovery.announce('test', address.port)
+		discovery.announce('hypercore-experiment', { port: address.port })
 	})
 }
