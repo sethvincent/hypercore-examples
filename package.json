@@ -16,6 +16,7 @@
     "hyperblobs": "^2.0.0-alpha.2",
     "hypercore": "^10.0.0-alpha.38",
     "hypercore-crypto": "^3.2.1",
+    "hyperswarm": "^3.0.4",
     "mdns-sd-discovery": "^2.0.1",
     "pump": "^3.0.0",
     "random-access-memory": "^4.1.0"

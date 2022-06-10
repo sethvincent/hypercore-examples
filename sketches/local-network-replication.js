@@ -65,6 +65,7 @@ if (key) {
 	console.log(`run this in a second terminal window passing the key as the first argument:
 		node sketches/local-network-replication.js ${core.key.toString('hex')}
 	`)
+
 	// appending data
 	core.append([
 		'a',
@@ -72,14 +73,14 @@ if (key) {
 		'c'
 	])
 
-	// appending data after 6 seconds to see it update live
+	// appending data after 10 seconds to see it update live
 	setTimeout(() => {
 		core.append([
 			'd',
 			'e',
 			'f'
 		])
-	}, 6000)
+	}, 10000)
 
 	// create a tcp server
 	const server = net.createServer((socket) => {
