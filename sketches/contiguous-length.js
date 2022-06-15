@@ -4,12 +4,12 @@ import ram from 'random-access-memory'
 
 /*
 Run this in one terminal window: 
-`node sketches/hyperswarm.js`
+`node sketches/contiguous-length.js`
 
 Copy the key that is logged.
 
 Run this in a second terminal window passing the key as the first argument:
-`node sketches/hyperswarm.js <key>`
+`node sketches/contiguous-length.js <key>`
 
 Run that second command within a few seconds and you'll see a live update of the data being logged.
 */
@@ -22,6 +22,24 @@ const core = new Hypercore(ram, key)
 
 // wait for the core to be ready
 await core.ready()
+
+let updating = false
+setInterval(() => {
+	for (const peer of core.peers) {
+		if (peer.remoteLength < core.contiguousLength) {
+			updating = true
+			console.log('peer needs data', peer.remoteLength, core.contiguousLength)
+		} else if (peer.remoteLength > core.contiguousLength) {
+			updating = true
+			console.log('peer has data', peer.remoteLength, core.contiguousLength)
+		} else if (peer.remoteLength === core.contiguousLength) {
+			if (updating) {
+				console.log('peer done updating', peer.remoteLength, core.contiguousLength)
+				updating = false
+			}
+		}
+	}
+}, 1);
 
 // initialize the hyperswarm module to use to find other services
 const swarm = new Hyperswarm()
@@ -46,7 +64,7 @@ if (key) {
 
 	console.log('key:', core.key.toString('hex'))
 	console.log(`run this in a second terminal window passing the key as the first argument:
-		node sketches/hyperswarm.js ${core.key.toString('hex')}
+		node sketches/contiguous-length.js ${core.key.toString('hex')}
 	`)
 
 	// appending data
@@ -64,4 +82,13 @@ if (key) {
 			'f'
 		])
 	}, 10000)
+
+	// appending data after 20 seconds to see it update live
+	setTimeout(() => {
+		core.append([
+			'g',
+			'h',
+			'i'
+		])
+	}, 20000)
 }
