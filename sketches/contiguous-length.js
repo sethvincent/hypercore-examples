@@ -28,13 +28,13 @@ setInterval(() => {
 	for (const peer of core.peers) {
 		if (peer.remoteLength < core.contiguousLength) {
 			updating = true
-			console.log('peer needs data', peer.remoteLength, core.contiguousLength)
+			console.log('peer needs data', peer.remoteLength, core.contiguousLength, core.byteLength)
 		} else if (peer.remoteLength > core.contiguousLength) {
 			updating = true
-			console.log('peer has data', peer.remoteLength, core.contiguousLength)
+			console.log('peer has data', peer.remoteLength, core.contiguousLength, core.byteLength)
 		} else if (peer.remoteLength === core.contiguousLength) {
 			if (updating) {
-				console.log('peer done updating', peer.remoteLength, core.contiguousLength)
+				console.log('peer done updating', peer.remoteLength, core.contiguousLength, core.byteLength)
 				updating = false
 			}
 		}
