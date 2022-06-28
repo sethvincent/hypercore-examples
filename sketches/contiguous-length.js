@@ -3,7 +3,7 @@ import Hyperswarm from 'hyperswarm'
 import ram from 'random-access-memory'
 
 /*
-Run this in one terminal window: 
+Run this in one terminal window:
 `node sketches/contiguous-length.js`
 
 Copy the key that is logged.
@@ -39,7 +39,7 @@ setInterval(() => {
 			}
 		}
 	}
-}, 1);
+}, 1)
 
 // initialize the hyperswarm module to use to find other services
 const swarm = new Hyperswarm()

@@ -3,7 +3,7 @@ import Hyperswarm from 'hyperswarm'
 import ram from 'random-access-memory'
 
 /*
-Run this in one terminal window: 
+Run this in one terminal window:
 `node sketches/hyperswarm.js`
 
 Copy the key that is logged.

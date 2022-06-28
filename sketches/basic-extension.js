@@ -51,7 +51,7 @@ const replicate2 = core2.replicate(false, { keepAlive: false })
 // pipe the replication streams into each other
 replicate1.pipe(replicate2).pipe(replicate1)
 
-await new Promise(resolve => setImmediate(resolve))
+await new Promise((resolve) => setImmediate(resolve))
 
 // send a message
 ext.send('hi', core2.peers[0])

@@ -1,40 +1,47 @@
 {
-  "name": "hypercore-experiments",
-  "description": "> A repository I'm using to learn hypercore and related modules.",
-  "version": "0.0.0",
-  "main": "index.js",
-  "type": "module",
-  "dependencies": {
-    "@hyperswarm/secret-stream": "^6.0.0",
-    "autobase": "^1.0.0-alpha.8",
-    "b4a": "^1.5.3",
-    "better-sqlite3": "^7.5.3",
-    "corestore": "^6.0.1-alpha.17",
-    "dns-discovery": "^6.2.3",
-    "dnssd": "^0.4.1",
-    "hyperbee": "^1.10.1",
-    "hyperblobs": "^2.0.0-alpha.2",
-    "hypercore": "^10.0.0-alpha.45",
-    "hypercore-crypto": "^3.3.0",
-    "hyperswarm": "^3.0.4",
-    "mdns-sd-discovery": "^3.0.0",
-    "pump": "^3.0.0",
-    "random-access-memory": "^4.1.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sethvincent/hypercore-experiments.git"
-  },
-  "keywords": [
-    "hypercore"
-  ],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sethvincent/hypercore-experiments/issues"
-  },
-  "homepage": "https://github.com/sethvincent/hypercore-experiments#readme"
+	"name": "hypercore-experiments",
+	"description": "> A repository I'm using to learn hypercore and related modules.",
+	"version": "0.0.0",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"lint": "dxv lint",
+		"format": "dxv format"
+	},
+	"dependencies": {
+		"@hyperswarm/secret-stream": "^6.0.0",
+		"autobase": "^1.0.0-alpha.8",
+		"b4a": "^1.5.3",
+		"better-sqlite3": "^7.5.3",
+		"corestore": "^6.0.1-alpha.18",
+		"dns-discovery": "^6.2.3",
+		"dnssd": "^0.4.1",
+		"hyperbee": "^1.10.1",
+		"hyperblobs": "^2.0.0-alpha.2",
+		"hypercore": "^10.0.0-alpha.45",
+		"hypercore-crypto": "^3.3.0",
+		"hypercore-id-encoding": "^1.0.0",
+		"hyperswarm": "^3.0.4",
+		"mdns-sd-discovery": "^3.1.4",
+		"mri": "^1.2.0",
+		"multistream": "^4.1.0",
+		"pump": "^3.0.0",
+		"random-access-memory": "^4.1.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sethvincent/hypercore-experiments.git"
+	},
+	"keywords": [
+		"hypercore"
+	],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/sethvincent/hypercore-experiments/issues"
+	},
+	"homepage": "https://github.com/sethvincent/hypercore-experiments#readme",
+	"devDependencies": {
+		"@dxv/cli": "^1.1.0"
+	}
 }
