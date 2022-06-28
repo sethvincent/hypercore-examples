@@ -23,20 +23,17 @@ let core2
 if (!key) {
 	core1 = store.get({ name: 'example' })
 	await core1.ready()
-	console.log(`core1: ${core1.key.toString('hex')}`)
+
 	core2 = store.get({ name: 'example2' })
 	await core2.ready()
 } else {
 	core1 = store.get({ key: Buffer.from(key, 'hex') })
 	await core1.ready()
-	console.log(`core1: ${core1.key.toString('hex')}`)
 }
 
 const ext1 = core1.registerExtension('cores', {
 	encoding: 'json',
-	onmessage: (keys) => {
-		console.log('keys', keys)
-	}
+	onmessage: (keys) => {}
 })
 
 const swarm = new Hyperswarm()
@@ -52,7 +49,7 @@ swarm.on('connection', (connection, info) => {
 				console.log('keys', keys)
 				for (const key of keys) {
 					const core = store.get({ key: Buffer.from(key, 'hex') })
-					core.download()
+					core.download({ start: 0, end: -1 })
 
 					core.on('download', async (index) => {
 						const data = await core.get(index)
@@ -64,9 +61,9 @@ swarm.on('connection', (connection, info) => {
 	} else {
 		core1.on('peer-add', (peer) => {
 			const keys = Array.from(store.cores.values()).map((core) => {
-				console.log(core)
 				return core.key.toString('hex')
 			})
+
 			console.log('keys', keys)
 			ext1.send(keys, peer)
 		})

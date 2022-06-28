@@ -59,7 +59,7 @@ discovery.on('service', async (service) => {
 		console.log('connect?')
 		// create a replication stream from the core and pipe the socket stream into the replication stream and back again
 		// the socket stream is a remote hypercore replication stream
-		
+
 		socket.pipe(store.replicate(true)).pipe(socket)
 		core1.download()
 		core2.download()

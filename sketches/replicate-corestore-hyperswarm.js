@@ -1,5 +1,3 @@
-import net from 'net'
-
 import Corestore from 'corestore'
 import Hyperswarm from 'hyperswarm'
 import ram from 'random-access-memory'
