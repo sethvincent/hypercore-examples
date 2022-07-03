@@ -12,3 +12,11 @@
   - [sketch](sketches/local-network-replication.js)
 - [x] Create a basic hypercore extension
   - [sketch](sketches/basic-extension.js)
+- [x] Use hypercore `auth` option with keypair
+  - [sketch](sketches/auth-hypercore.js)
+- [x] Replicate corestore over mdns
+  - [sketch](sketches/replicate-corestore-mdns.js) 
+- [x] Replicate corestore over hyperswarm
+  - [sketch](sketches/replicate-corestore-hyperswarm.js) 
+- [x] Replicate corestore and send hypercore keys over an extension
+  - [sketch](sketches/replicate-corestore-extension-storekeys.js)
