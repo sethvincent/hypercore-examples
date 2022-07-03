@@ -4,12 +4,12 @@
 
 ## Goals
 
-- [x] Replicate over hyperswarm
-  - [sketch](sketches/hyperswarm.js)
 - [x] Storing JSON in hypercores
   - [sketch](sketches/json-encoding-replication.js)
 - [x] Sync data over a local network
   - [sketch](sketches/local-network-replication.js)
+- [x] Sync data over hyperswarm
+  - [sketch](sketches/hyperswarm.js)
 - [x] Create a basic hypercore extension
   - [sketch](sketches/basic-extension.js)
 - [x] Use hypercore `auth` option with keypair
