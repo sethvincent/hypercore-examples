@@ -4,19 +4,19 @@
 
 ## Goals
 
-- [x] Storing JSON in hypercores
+- [x] Store JSON in hypercores
   - [sketch](sketches/json-encoding-replication.js)
-- [x] Sync data over a local network
+- [x] Find peers over mdns to sync data
   - [sketch](sketches/local-network-replication.js)
-- [x] Sync data over hyperswarm
+- [x] Find peers with hyperswarm to sync data
   - [sketch](sketches/hyperswarm.js)
 - [x] Create a basic hypercore extension
   - [sketch](sketches/basic-extension.js)
-- [x] Use hypercore `auth` option with keypair
+- [x] Use hypercore `auth` option with existing keypair
   - [sketch](sketches/auth-hypercore.js)
 - [x] Replicate corestore over mdns
   - [sketch](sketches/replicate-corestore-mdns.js) 
 - [x] Replicate corestore over hyperswarm
   - [sketch](sketches/replicate-corestore-hyperswarm.js) 
-- [x] Replicate corestore and send hypercore keys over an extension
+- [x] Replicate corestore and send all hypercore keys over an extension
   - [sketch](sketches/replicate-corestore-extension-storekeys.js)
