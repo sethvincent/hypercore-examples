@@ -1,4 +1,4 @@
-# hypercore-experiments
+# hypercore-examples
 
 > A repository I'm using to learn hypercore and related modules.
 
