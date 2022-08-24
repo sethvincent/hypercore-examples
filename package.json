@@ -19,7 +19,7 @@
 		"dnssd": "^0.4.1",
 		"hyperbee": "^2.0.0",
 		"hyperblobs": "^2.0.0",
-		"hypercore": "^10.1.0",
+		"hypercore": "^10.2.0",
 		"hypercore-crypto": "^3.3.0",
 		"hypercore-id-encoding": "^1.0.0",
 		"hyperdrive": "^11.0.0-alpha.1",

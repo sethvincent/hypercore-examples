@@ -49,6 +49,8 @@ if (!key) {
 }
 
 setInterval(async () => {
+	// doing a map and filter here seems weird.
+	// it would be cool to get basically the localBitfield array of uint32Arrays as part of core.info()
 	const localBitfield = core.core.bitfield.pages.tiny.b.map((arr) => {
 		return arr.bitfield
 	}).filter((arr) => {
@@ -56,6 +58,7 @@ setInterval(async () => {
 	})
 
 	for (const peer of core.peers) {
+		// like above, filtering out the unused items in the array feels weird but maybe not bad?
 		const remoteBitfield = peer.remoteBitfield.pages.tiny.b.filter((arr) => {
 			return !!arr
 		})
@@ -67,18 +70,10 @@ setInterval(async () => {
 		} else {
 			// TODO: ideally we'd get a diff of the two bitfields
 			// TODO: visualize the difference between the two bitfields
-			for (const index in localBitfield) {
-				const local = localBitfield[index]
-				const remote = remoteBitfield[index]
+			const updated = isUpdated(remoteBitfield, localBitfield)
 
-				if (!local || !remote) {
-					update({ status: 'updating' })
-				} else {
-					const updated = isUpdated(remoteBitfield, localBitfield)
-					if (updated) {
-						update({ status: 'syncing' })
-					}
-				}
+			if (updated) {
+				update({ status: 'syncing' })
 			}
 		}
 	}
