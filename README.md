@@ -20,3 +20,7 @@
   - [sketch](sketches/replicate-corestore-hyperswarm.js) 
 - [x] Replicate corestore and send all hypercore keys over an extension
   - [sketch](sketches/replicate-corestore-extension-storekeys.js)
+- [x] Compare local and remote lengths
+  - [sketch](sketches/compare-lengths.js)
+- [x] Compare local and remote bitfields
+  - [sketch](sketches/compare-bitfields.js)

@@ -50,15 +50,15 @@ if (key) {
 	`)
 
 	// appending data
-	core.append([
+	await core.append([
 		'a',
 		'b',
 		'c'
 	])
 
 	// appending data after 10 seconds to see it update live
-	setTimeout(() => {
-		core.append([
+	setTimeout(async () => {
+		await core.append([
 			'd',
 			'e',
 			'f'

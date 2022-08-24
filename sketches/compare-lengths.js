@@ -4,12 +4,12 @@ import ram from 'random-access-memory'
 
 /*
 Run this in one terminal window:
-`node sketches/contiguous-length.js`
+`node sketches/compare-lengths.js`
 
 Copy the key that is logged.
 
 Run this in a second terminal window passing the key as the first argument:
-`node sketches/contiguous-length.js <key>`
+`node sketches/compare-lengths.js <key>`
 
 Run that second command within a few seconds and you'll see a live update of the data being logged.
 */
@@ -64,19 +64,22 @@ if (key) {
 
 	console.log('key:', core.key.toString('hex'))
 	console.log(`run this in a second terminal window passing the key as the first argument:
-		node sketches/contiguous-length.js ${core.key.toString('hex')}
+		node sketches/compare-lengths.js ${core.key.toString('hex')}
 	`)
 
 	// appending data
-	core.append([
+	const { length, byteLength } = await core.append([
 		'a',
 		'b',
 		'c'
 	])
 
+	console.log('length', length)
+	console.log('byteLength', byteLength)
+
 	// appending data after 10 seconds to see it update live
-	setTimeout(() => {
-		core.append([
+	setTimeout(async () => {
+		await core.append([
 			'd',
 			'e',
 			'f'
@@ -84,8 +87,8 @@ if (key) {
 	}, 10000)
 
 	// appending data after 20 seconds to see it update live
-	setTimeout(() => {
-		core.append([
+	setTimeout(async () => {
+		await core.append([
 			'g',
 			'h',
 			'i'
