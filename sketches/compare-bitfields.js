@@ -22,7 +22,7 @@ Run that second command within a few seconds and you'll see a live update of the
 const key = process.argv[2]
 
 // state for cli rendering
-var state = {
+let state = {
 	appendedBlocks: 0,
 	totalBlocks: 50000,
 	status: 'updating',
@@ -60,10 +60,10 @@ setInterval(async () => {
 			return !!arr
 		})
 
-		const equal = intArrayEqual(remoteBitfield, localBitfield)
+		const downloaded = isDownloaded(remoteBitfield, localBitfield)
 
-		if (equal) {
-			update({ status: 'synced' })
+		if (downloaded) {
+			update({ status: 'downloaded' })
 		} else {
 			// TODO: ideally we'd get a diff of the two bitfields
 			// TODO: visualize the difference between the two bitfields
@@ -74,14 +74,9 @@ setInterval(async () => {
 				if (!local || !remote) {
 					update({ status: 'updating' })
 				} else {
-					const percents = intArrayPercents(remoteBitfield, localBitfield)
-					update({ percents: percents.toString() })
-					if (
-						percents.every((percent) => {
-							return percent === 1
-						})
-					) {
-						update({ status: 'syncing ' })
+					const updated = isUpdated(remoteBitfield, localBitfield)
+					if (updated) {
+						update({ status: 'syncing' })
 					}
 				}
 			}
@@ -90,20 +85,22 @@ setInterval(async () => {
 }, 1)
 
 // if lengths match in each array that means the local core is updated with the remote core tree
-function intArrayPercents (remoteBitfield, localBitfield) {
-	const percent = []
+function isUpdated (remoteBitfield, localBitfield) {
+	const percents = []
 
 	for (const index in remoteBitfield) {
 		const remote = remoteBitfield[index]
 		const local = localBitfield[index]
-		percent[index] = (local || []).length / (remote || []).length
+		percents[index] = (local || []).length / (remote || []).length
 	}
 
-	return percent
+	return percents.every((percent) => {
+		return percent === 1
+	})
 }
 
 // if this returns true it means all data has been downloaded from the remote core
-function intArrayEqual (intArrays1, intArrays2) {
+function isDownloaded (intArrays1, intArrays2) {
 	if (intArrays1.length !== intArrays2.length) {
 		return false
 	}
@@ -179,7 +176,7 @@ function renderInstructions (state) {
 	}
 
 	if (!state.key && !state.shareKey) {
-		return ``
+		return ''
 	}
 
 	if (state.appendedBlocks !== state.totalBlocks) {
