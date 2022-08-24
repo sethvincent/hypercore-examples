@@ -15,9 +15,9 @@
 - [x] Use hypercore `auth` option with existing keypair
   - [sketch](sketches/auth-hypercore.js)
 - [x] Replicate corestore over mdns
-  - [sketch](sketches/replicate-corestore-mdns.js) 
+  - [sketch](sketches/replicate-corestore-mdns.js)
 - [x] Replicate corestore over hyperswarm
-  - [sketch](sketches/replicate-corestore-hyperswarm.js) 
+  - [sketch](sketches/replicate-corestore-hyperswarm.js)
 - [x] Replicate corestore and send all hypercore keys over an extension
   - [sketch](sketches/replicate-corestore-extension-storekeys.js)
 - [x] Compare local and remote lengths

@@ -1,7 +1,7 @@
 import Hypercore from 'hypercore'
+import crypto from 'hypercore-crypto'
 import Hyperswarm from 'hyperswarm'
 import ram from 'random-access-memory'
-import crypto from 'hypercore-crypto'
 
 /*
 Run this in one terminal window:

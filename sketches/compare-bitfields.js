@@ -1,8 +1,8 @@
+import Diffy from 'diffy'
 import Hypercore from 'hypercore'
 import Hyperswarm from 'hyperswarm'
-import ram from 'random-access-memory'
-import Diffy from 'diffy'
 import trim from 'outdent'
+import ram from 'random-access-memory'
 
 const output = Diffy()
 
@@ -27,7 +27,7 @@ var state = {
 	totalBlocks: 50000,
 	status: 'updating',
 	key,
-	shareKey: null,
+	shareKey: null
 }
 
 update(state)
@@ -71,15 +71,17 @@ setInterval(async () => {
 				const local = localBitfield[index]
 				const remote = remoteBitfield[index]
 
-				if (!local || ! remote) {
+				if (!local || !remote) {
 					update({ status: 'updating' })
 				} else {
 					const percents = intArrayPercents(remoteBitfield, localBitfield)
 					update({ percents: percents.toString() })
-					if (percents.every((percent) => {
-						return percent === 1
-					})) {
-						update({ status: 'syncing '})
+					if (
+						percents.every((percent) => {
+							return percent === 1
+						})
+					) {
+						update({ status: 'syncing ' })
 					}
 				}
 			}
@@ -161,7 +163,7 @@ function render (state) {
 
 function renderCount (state) {
 	if (state.key) {
-		return undefined
+		return ''
 	}
 
 	return `${state.appendedBlocks}/${state.totalBlocks}`
