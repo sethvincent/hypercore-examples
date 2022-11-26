@@ -1,7 +1,7 @@
 import net from 'net'
 
 import Corestore from 'corestore'
-import { MdnsDiscovery } from 'mdns-sd-discovery'
+import { MdnsDiscovery } from 'multicast-service-discovery'
 import ram from 'random-access-memory'
 
 /*
@@ -37,8 +37,8 @@ if (!key) {
 	await core2.ready()
 }
 
-// initialize the mdns-sd-discovery module to use to find other services
-const discovery = new MdnsDiscovery({ host: 'hypercore-experiment' })
+// initialize the multicast-service-discovery module to use to find other services
+const discovery = new MdnsDiscovery()
 
 // listen for new services
 discovery.on('service', async (service) => {

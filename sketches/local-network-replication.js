@@ -1,5 +1,5 @@
 import Hypercore from 'hypercore'
-import { MdnsDiscovery } from 'mdns-sd-discovery'
+import { MdnsDiscovery } from 'multicast-service-discovery'
 import net from 'net'
 import ram from 'random-access-memory'
 
@@ -24,16 +24,16 @@ const core = new Hypercore(ram, key)
 // wait for the core to be ready
 await core.ready()
 
-// initialize the mdns-sd-discovery module to use to find other services
-const discovery = new MdnsDiscovery({ host: 'hypercore-experiment' })
+// initialize the multicast-service-discovery module to use to find other services
+const discovery = new MdnsDiscovery()
 
 // listen for new services
-discovery.on('service', async (name, service) => {
-	console.log('service', name, service)
+discovery.on('service', async (service) => {
+	console.log('service', service)
 
 	// create a tcp socket to connect to the service
 	const socket = net.connect({
-		host: service.host,
+		host: service.addresses[0],
 		port: service.port,
 		allowHalfOpen: true
 	})
